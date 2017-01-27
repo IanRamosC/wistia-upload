@@ -1,0 +1,89 @@
+/*  Base  */
+/*  Layouts  */
+* {
+  box-sizing: border-box; }
+
+body, html {
+  margin: 0;
+  width: 100%;
+  height: 100%; }
+
+body {
+  background: #663399;
+  background: -moz-linear-gradient(-45deg, #663399 0%, #674172 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #663399 0%, #674172 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #663399 0%, #674172 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$primary-color', endColorstr='$secondary-color',GradientType=1 );
+  /* IE6-9 fallback on horizontal gradient */ }
+
+/*  Modules  */
+.wistia-wrapper {
+  margin: 10px auto;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  background-color: #f0e7f2; }
+  .wistia-wrapper__upload {
+    padding: 15px;
+    height: 300px; }
+
+.upload__dropzone {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  border: 3px dashed rgba(0, 0, 0, 0.15);
+  color: #888;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  transition-property: color, border; }
+  .upload__dropzone:hover {
+    color: #555;
+    border-color: rgba(0, 0, 0, 0.35); }
+
+.dropzone__tip {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); }
+
+.dropzone__icon {
+  display: table;
+  margin: auto;
+  font-size: 58px; }
+
+.dropzone__input {
+  position: absolute;
+  height: 0.1px;
+    height-width: 0.1px;
+  overflow: hidden;
+    overflow-filter: alpha(opacity=0);
+    overflow-opacity: 0;
+    overflow-z-index: -1; }
+
+.message {
+  width: 100%;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  background-color: #CCC;
+  color: #666; }
+  .message__icon {
+    margin-left: 10px;
+    margin-right: 10px; }
+  .message--success {
+    background-color: #03C9A9;
+    color: #019875; }
+  .message--info {
+    background-color: #52B3D9;
+    color: #3A539B; }
+  .message--warning {
+    background-color: #F4D03F;
+    color: #F7CA18; }
+  .message--danger {
+    background-color: #EC644B;
+    color: #CF000F; }

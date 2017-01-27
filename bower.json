@@ -1,0 +1,22 @@
+{
+  "name": "wistia-upload",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Ian Ramos <ianramosc@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "blueimp-file-upload": "^9.14.2",
+    "angular": "^1.6.1",
+    "jquery": "~1.12.4"
+  }
+}
