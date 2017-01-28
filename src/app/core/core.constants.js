@@ -7,8 +7,31 @@
 
 		//Messages
 		messages: {
-			multiUploadErr: "You can't upload multiple videos at once."
-		}
+			multi_upload_err: "You can't upload multiple videos at once.",
+			MIME_err: "Invalid file format."
+		},
+
+		//List of all valid MIME types
+		validMIME: [
+			'video/quicktime',
+			'video/mpeg',
+			'application/x-troff-msvideo',
+			'video/avi',
+			'video/msvideo',
+			'video/x-msvideo',
+			'video/x-flv',
+			'video/x-f4v',
+			'video/mp4',
+			'video/x-m4v',
+			'video/x-ms-asf',
+			'video/x-ms-wmv',
+			'video/dvd',
+			'video/3gpp',
+			'video/x-matroska',
+			'video/divx',
+			'video/x-xvid',
+			'video/webm'
+		]
 	};
 
 	angular.module('wistia.core')

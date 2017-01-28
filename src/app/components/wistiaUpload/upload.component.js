@@ -19,8 +19,8 @@
     	}
     });
 
-  UploadController.$inject = ['$scope', '$element', 'COMMON'];
-  function UploadController ($scope, $element, COMMON) {
+  UploadController.$inject = ['$scope', '$element', 'COMMON', 'Util'];
+  function UploadController ($scope, $element, COMMON, Util) {
   	var setMessage = function (text, cssClass) {
   		return ({
   			text: text || '',
@@ -48,15 +48,15 @@
 			// jQuery file upload methods
 			add: function(e, data) {
 				if (data.originalFiles.length > 1) {
-					_state.message = setMessage(COMMON.messages.multiUploadErr, 'message--danger');
+					_state.message = setMessage(COMMON.messages.multi_upload_err, 'message--danger');
+					vm.onUpdate(_state);
+					return;
+				} else if (!Util.isValidType(data.files[0].type)) {
+					_state.message = setMessage(COMMON.messages.MIME_err, 'message--danger');
 					vm.onUpdate(_state);
 					return;
 				}
 				data.submit();
-			},
-
-			processdone: function(asd, asd2) {
-				console.log(asd, asd2, " OK");
 			}
 
 		});

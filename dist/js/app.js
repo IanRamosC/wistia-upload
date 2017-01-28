@@ -85,8 +85,31 @@
 
 		//Messages
 		messages: {
-			multiUploadErr: "You can't upload multiple videos at once."
-		}
+			multi_upload_err: "You can't upload multiple videos at once.",
+			MIME_err: "Invalid file format."
+		},
+
+		//List of all valid MIME types
+		validMIME: [
+			'video/quicktime',
+			'video/mpeg',
+			'application/x-troff-msvideo',
+			'video/avi',
+			'video/msvideo',
+			'video/x-msvideo',
+			'video/x-flv',
+			'video/x-f4v',
+			'video/mp4',
+			'video/x-m4v',
+			'video/x-ms-asf',
+			'video/x-ms-wmv',
+			'video/dvd',
+			'video/3gpp',
+			'video/x-matroska',
+			'video/divx',
+			'video/x-xvid',
+			'video/webm'
+		]
 	};
 
 	angular.module('wistia.core')
@@ -96,11 +119,32 @@
 (function () {
 	'use strict';
 
+	/**
+	 * @ngdoc service
+	 * @name wistia.core.service:Util
+	 * @description
+	 *   Service to handle utilities used in the whole app
+	 */
+
 	angular.module('wistia.core')
     .service('Util', Util);
 
-  Util.$inject = [];
-  function Util () {
+  Util.$inject = ['COMMON'];
+  function Util (COMMON) {
+  	/**
+  	 * @ngdoc method
+  	 * @name isValidType
+  	 * @methodOf wistia.core.service:Util
+  	 * @description
+  	 * This method will return if a MIME type is valid for upload
+  	 *
+  	 * @param {String} type The MIME type to be checked
+  	 *
+  	 * @returns {Boolean} If is a valid MIME type
+  	 */
+  	this.isValidType = function (type) {
+  		return COMMON.validMIME.indexOf(type) > -1;
+  	}
   }
 })();
 
@@ -125,8 +169,8 @@
     	}
     });
 
-  UploadController.$inject = ['$scope', '$element', 'COMMON'];
-  function UploadController ($scope, $element, COMMON) {
+  UploadController.$inject = ['$scope', '$element', 'COMMON', 'Util'];
+  function UploadController ($scope, $element, COMMON, Util) {
   	var setMessage = function (text, cssClass) {
   		return ({
   			text: text || '',
@@ -154,15 +198,15 @@
 			// jQuery file upload methods
 			add: function(e, data) {
 				if (data.originalFiles.length > 1) {
-					_state.message = setMessage(COMMON.messages.multiUploadErr, 'message--danger');
+					_state.message = setMessage(COMMON.messages.multi_upload_err, 'message--danger');
+					vm.onUpdate(_state);
+					return;
+				} else if (!Util.isValidType(data.files[0].type)) {
+					_state.message = setMessage(COMMON.messages.MIME_err, 'message--danger');
 					vm.onUpdate(_state);
 					return;
 				}
 				data.submit();
-			},
-
-			processdone: function(asd, asd2) {
-				console.log(asd, asd2, " OK");
 			}
 
 		});
