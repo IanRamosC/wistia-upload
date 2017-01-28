@@ -10,13 +10,12 @@
   <!--<link rel="apple-touch-icon" href="apple-touch-icon.png">-->
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <link rel="stylesheet" href="dist/css/style.css">
 </head>
 <body data-ng-controller="HomeController as ctrl">
 
-  <div>
-    <wistia-upload></wistia-upload>
-  </div>
+  <wistia-upload class="wistia-upload" config="ctrl.config"></wistia-upload>
 
   <script src="libs/jquery/dist/jquery.min.js"></script>
   <script src="libs/angular/angular.min.js"></script>

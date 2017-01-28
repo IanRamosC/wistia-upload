@@ -13,57 +13,18 @@
 (function () {
 	'use strict';
 
-	angular.module('wistia.core', []);
+	angular.module('wistia.home', []);
 })();
 (function () {
 	'use strict';
 
-	angular.module('wistia.home', []);
+	angular.module('wistia.core', []);
 })();
 (function () {
 	'use strict';
 
 	angular.module('upload', []);
 })();
-(function () {
-	'use strict';
-	/**
-	 * @ngdoc config
-	 * @name wistia.core.config:appConfig
-	 * @description
-	 *   App's core configuration
-	 */
-
-	angular.module('wistia.core')
-		.config(appConfig);
-
-	appConfig.$inject = [];
-	function appConfig () {
-  }
-})();
-
-(function () {
-	'use strict';
-
-	var COMMON = {
-		ROOT_PATH: ""
-	};
-
-	angular.module('wistia.core')
-		.constant('COMMON', COMMON);
-
-})();
-(function () {
-	'use strict';
-
-	angular.module('wistia.core')
-    .service('Util', Util);
-
-  Util.$inject = [];
-  function Util () {
-  }
-})();
-
 (function () {
 	'use strict';
 
@@ -85,6 +46,45 @@
 
 (function () {
 	'use strict';
+	/**
+	 * @ngdoc config
+	 * @name wistia.core.config:appConfig
+	 * @description
+	 *   App's core configuration
+	 */
+
+	angular.module('wistia.core')
+		.config(appConfig);
+
+	appConfig.$inject = [];
+	function appConfig () {
+  }
+})();
+
+(function () {
+	'use strict';
+
+	var COMMON = {
+		api_key: "93773be19b08b2adfad9cfad8c4294b39be64b8d4bcda8e533f7c617f0d94236"
+	};
+
+	angular.module('wistia.core')
+		.constant('COMMON', COMMON);
+
+})();
+(function () {
+	'use strict';
+
+	angular.module('wistia.core')
+    .service('Util', Util);
+
+  Util.$inject = [];
+  function Util () {
+  }
+})();
+
+(function () {
+	'use strict';
 
 	/**
 	 * @ngdoc component
@@ -99,19 +99,23 @@
     	controller: UploadController,
     	controllerAs: "wistia",
     	bindings: {
-    		name: '@',
-    		p: '@'
+    		config: '='
     	}
     });
 
-  UploadController.$inject = ['$scope', '$element'];
-  function UploadController ($scope, $element) {
+  UploadController.$inject = ['$element', 'COMMON'];
+  function UploadController ($element, COMMON) {
   	var vm = this,
   		element = $element;
 
   		element.fileupload({
   			dataType: 'json',
   			dropzone: angular.element(element[0].querySelector('upload__dropzone')),
+  			formData: {
+  				api_password: COMMON.api_key
+  			},
+
+  			// Methods
   			add: function(e, data) {
   				console.log(e, data);
   			}

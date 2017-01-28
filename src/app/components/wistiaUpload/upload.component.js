@@ -14,19 +14,23 @@
     	controller: UploadController,
     	controllerAs: "wistia",
     	bindings: {
-    		name: '@',
-    		p: '@'
+    		config: '='
     	}
     });
 
-  UploadController.$inject = ['$scope', '$element'];
-  function UploadController ($scope, $element) {
+  UploadController.$inject = ['$element', 'COMMON'];
+  function UploadController ($element, COMMON) {
   	var vm = this,
   		element = $element;
 
   		element.fileupload({
   			dataType: 'json',
   			dropzone: angular.element(element[0].querySelector('upload__dropzone')),
+  			formData: {
+  				api_password: COMMON.api_key
+  			},
+
+  			// Methods
   			add: function(e, data) {
   				console.log(e, data);
   			}
