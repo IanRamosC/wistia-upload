@@ -21,7 +21,8 @@
   		},
   		video: {
 	  		isUploading: false,
-	  		isUploaded: false
+	  		isUploaded: false,
+	  		value: 0
 	  	}
   	};
 

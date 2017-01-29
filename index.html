@@ -15,7 +15,9 @@
 </head>
 <body data-ng-controller="HomeController as ctrl">
 
-  <wistia-upload class="wistia-upload" state="ctrl.state" on-update="ctrl.setState(ctrl.state)"></wistia-upload>
+  <div class="holder">
+    <wistia-upload class="wistia-upload" state="ctrl.state" on-update="ctrl.setState(ctrl.state)"></wistia-upload>
+  </div>
 
   <script src="libs/jquery/dist/jquery.min.js"></script>
   <script src="libs/angular/angular.min.js"></script>
