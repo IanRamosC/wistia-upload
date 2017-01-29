@@ -48,10 +48,13 @@
 	var COMMON = {
 		api_key: "93773be19b08b2adfad9cfad8c4294b39be64b8d4bcda8e533f7c617f0d94236",
 		api_url: "https://upload.wistia.com",
+		embed_url: "https://fast.wistia.net/embed/iframe/",
 
 		//Messages
 		messages: {
 			multi_upload_err: "You can't upload multiple videos at once.",
+			common_err: "An error has occurred. Try again later.",
+			partial_upload_success: " was successfully uploaded.",
 			MIME_err: "Invalid file format."
 		},
 
@@ -138,7 +141,10 @@
   		video: {
 	  		isUploading: false,
 	  		isUploaded: false,
-	  		value: 0
+	  		value: 0,
+	  		url: '',
+	  		height: 0,
+	  		width: 0
 	  	}
   	};
 
@@ -170,8 +176,8 @@
     	}
     });
 
-  UploadController.$inject = ['$scope', '$element', 'COMMON', 'Util'];
-  function UploadController ($scope, $element, COMMON, Util) {
+  UploadController.$inject = ['$scope', '$sce', '$element', 'COMMON', 'Util'];
+  function UploadController ($scope, $sce, $element, COMMON, Util) {
   	var setMessage = function (text, cssClass) {
   		return ({
   			text: text || '',
@@ -180,17 +186,13 @@
   	};
 
   	var vm = this,
-	  	el = $element,
+	  	el = angular.element($element[0].querySelector('#fileupload')),
 	  	_state;
 
-  	vm.$onInit = function () {
-  		_state = vm.state;
-  	};
-
-		el.fileupload({
+  	var _options = {
 			// jQuery file upload properties
 			dataType: 'json',
-			dropzone: angular.element(el[0].querySelector('upload__dropzone')),
+			dropzone: angular.element($element[0].querySelector('.upload__dropzone')),
 			maxNumberOfFiles: 1,
 			url: COMMON.api_url,
 			formData: {
@@ -199,13 +201,13 @@
 
 			// jQuery file upload methods
 			add: function (e, data) {
-				if (data.originalFiles.length > 1) {
-					_state.message = setMessage(COMMON.messages.multi_upload_err, 'message--danger');
+				if (!Util.isValidType(data.files[0].type)) {
+					_state.message = setMessage(COMMON.messages.MIME_err, 'message--danger');
 					vm.onUpdate(_state);
 
 					return;
-				} else if (!Util.isValidType(data.files[0].type)) {
-					_state.message = setMessage(COMMON.messages.MIME_err, 'message--danger');
+				} else if (data.originalFiles.length > 1) {
+					_state.message = setMessage(COMMON.messages.multi_upload_err, 'message--danger');
 					vm.onUpdate(_state);
 
 					return;
@@ -221,9 +223,30 @@
 				vm.onUpdate(_state);
 			},
 			done: function (e, data) {
-				console.log(e, data);
+				if(!!data.result && !!data.result.hashed_id) {
+					_state.video.isUploading = false;
+					_state.video.isUploaded = true;
+					_state.video.url = $sce.trustAsResourceUrl(COMMON.embed_url  + data.result.hashed_id);
+					_state.video.width = data.result.thumbnail.width;
+					_state.video.height = data.result.thumbnail.height;
+					_state.message = setMessage(data.result.name + COMMON.messages.partial_upload_success, 'message--success');
+					vm.onUpdate(_state);
+				}
+			},
+			fail: function (e, data) {
+					_state.video.isUploading = false;
+					_state.video.isUploaded = false;
+					_state.message = setMessage(COMMON.messages.common_err, 'message--danger');
+					vm.onUpdate(_state);
 			}
 
-		});
+		};
+
+  	vm.$onInit = function () {
+  		_state = vm.state;
+			el.fileupload(_options);
+  	};
+
+
   }
 })();

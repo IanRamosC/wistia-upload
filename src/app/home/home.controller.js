@@ -22,7 +22,10 @@
   		video: {
 	  		isUploading: false,
 	  		isUploaded: false,
-	  		value: 0
+	  		value: 0,
+	  		url: '',
+	  		height: 0,
+	  		width: 0
 	  	}
   	};
 

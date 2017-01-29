@@ -18,7 +18,9 @@ body {
   background: linear-gradient(135deg, #663399 0%, #674172 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$primary-color', endColorstr='$secondary-color',GradientType=1 );
-  /* IE6-9 fallback on horizontal gradient */ }
+  /* IE6-9 fallback on horizontal gradient */
+  background-repeat: no-repeat;
+  background-attachment: fixed; }
 
 .holder {
   width: 100%;
@@ -95,6 +97,11 @@ body {
   background-color: rgba(102, 51, 153, 0.8);
   border-radius: 3px;
   transition: width 0.2s ease; }
+
+.upload__video {
+  display: table;
+  margin: auto;
+  background-color: rgba(102, 51, 153, 0.5); }
 
 .message {
   width: 100%;

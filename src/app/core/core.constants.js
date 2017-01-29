@@ -4,10 +4,13 @@
 	var COMMON = {
 		api_key: "93773be19b08b2adfad9cfad8c4294b39be64b8d4bcda8e533f7c617f0d94236",
 		api_url: "https://upload.wistia.com",
+		embed_url: "https://fast.wistia.net/embed/iframe/",
 
 		//Messages
 		messages: {
 			multi_upload_err: "You can't upload multiple videos at once.",
+			common_err: "An error has occurred. Try again later.",
+			partial_upload_success: " was successfully uploaded.",
 			MIME_err: "Invalid file format."
 		},
 
