@@ -7,7 +7,7 @@ let gulp 	  = require('gulp')
 
 gulp.task('dev:js', _ => {
 	return gulp
-					.src(['src/app/app.module.js', 'src/app/**/*.module.js', 'src/app/**/*.js'])
+					.src(['src/app/app.module.js', 'src/app/**/*.module.js', 'src/app/**/*.js', '!src/app/**/*.spec.js'])
 					.pipe(concat('app.js'))
 					.pipe(gulp.dest('./dist/js/'))
 })
