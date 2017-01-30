@@ -3,6 +3,8 @@ let gulp 	  = require('gulp')
   , strip   = require('gulp-strip-debug')
 	,	uglify  = require('gulp-uglify')
   , sass    = require('gulp-sass')
+  , autoprefixer = require('gulp-autoprefixer')
+  , cleanCSS = require('gulp-clean-css')
 
 
 gulp.task('dev:js', _ => {
@@ -17,6 +19,10 @@ gulp.task('dev:css', _ => {
           .src('src/sass/app.sass')
           .pipe(sass().on('error', sass.logError))
           .pipe(concat('style.css'))
+          .pipe(autoprefixer({
+            browsers: ['last 50 versions'],
+            cascade: true
+          }))
           .pipe(gulp.dest('./dist/css/'))
 })
 
@@ -27,6 +33,17 @@ gulp.task('build:js', _ => {
           .pipe(uglify())
           .pipe(gulp.dest('./dist/js/'))
 })
+
+gulp.task('build:css', _ => {
+  return gulp
+          .src('./dist/css/style.css')
+          .pipe(cleanCSS({
+            compatibility: 'ie9'
+          }))
+          .pipe(gulp.dest('./dist/css/'))
+})
+
+gulp.task('build', ['build:js', 'build:css'])
 
 gulp.task('dev', _ => {
   gulp.start('dev:js', 'dev:css')

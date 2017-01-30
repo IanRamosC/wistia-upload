@@ -1,7 +1,9 @@
 /*  Base  */
 /*  Layouts  */
 * {
-  box-sizing: border-box; }
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box; }
 
 body, html {
   margin: 0;
@@ -15,6 +17,9 @@ body {
   /* FF3.6-15 */
   background: -webkit-linear-gradient(-45deg, #663399 0%, #674172 100%);
   /* Chrome10-25,Safari5.1-6 */
+  background: -webkit-linear-gradient(315deg, #663399 0%, #674172 100%);
+  background: -moz-linear-gradient(315deg, #663399 0%, #674172 100%);
+  background: -o-linear-gradient(315deg, #663399 0%, #674172 100%);
   background: linear-gradient(135deg, #663399 0%, #674172 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$primary-color', endColorstr='$secondary-color',GradientType=1 );
@@ -41,9 +46,13 @@ body {
   width: 100%;
   max-width: 600px;
   margin: 10px auto;
-  box-sizing: border-box;
-  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 2px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 2px;
+          border-radius: 2px;
   background-color: #f0e7f2; }
   .wistia-wrapper__upload {
     padding: 15px;
@@ -57,7 +66,13 @@ body {
   border: 3px dashed rgba(0, 0, 0, 0.15);
   color: #888;
   cursor: pointer;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
+  -webkit-transition-property: color, border;
+  -o-transition-property: color, border;
+  -moz-transition-property: color, border;
   transition-property: color, border; }
   .upload__dropzone:hover {
     color: #555;
@@ -67,7 +82,11 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%); }
+  -webkit-transform: translate(-50%, -50%);
+     -moz-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+       -o-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%); }
 
 .dropzone__icon {
   display: table;
@@ -89,13 +108,18 @@ body {
   margin: 10px auto;
   background-color: rgba(102, 51, 153, 0.3);
   border: 1px solid rebeccapurple;
-  border-radius: 3px; }
+  -webkit-border-radius: 3px;
+          border-radius: 3px; }
 
 .upload__progress-value {
   position: relative;
   height: 100%;
   background-color: rgba(102, 51, 153, 0.8);
-  border-radius: 3px;
+  -webkit-border-radius: 3px;
+          border-radius: 3px;
+  -webkit-transition: width 0.2s ease;
+  -o-transition: width 0.2s ease;
+  -moz-transition: width 0.2s ease;
   transition: width 0.2s ease; }
 
 .upload__video {
@@ -106,7 +130,9 @@ body {
 .message {
   width: 100%;
   padding: 15px 20px;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
   background-color: #CCC;
   color: #666; }
   .message__icon {
