@@ -37,8 +37,11 @@
 	angular.module('wistia.core')
 		.config(appConfig);
 
-	appConfig.$inject = [];
-	function appConfig () {
+	appConfig.$inject = ['$compileProvider'];
+	function appConfig ($compileProvider) {
+		$compileProvider.debugInfoEnabled(false);
+		$compileProvider.commentDirectivesEnabled(false);
+		$compileProvider.cssClassDirectivesEnabled(false);
   }
 })();
 
