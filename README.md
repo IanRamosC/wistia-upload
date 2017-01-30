@@ -1,7 +1,7 @@
 Wistia Upload Component
 =====
 
-This is an Angular component to upload videos to [Wistia](https://wistia.com/)
+This is an Angular component for uploading videos to [Wistia](https://wistia.com/)
 
 ### Installation
 
